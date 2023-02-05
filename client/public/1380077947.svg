@@ -1,0 +1,358 @@
+<?xml version="1.0"?>
+<svg
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:cc="http://web.resource.org/cc/"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:ns1="http://sozi.baierouge.fr"
+    viewBox="0 0 590 570"
+  >
+  <desc
+    >Train - inspired by openclipart.org "Toy train icon"
+    Scripted to start/stop the wheels when clicking anywhere on the train.
+    Easily scaled and positioned as desired. Scripting can be removed.
+    From the book, I Love to Color, Play, &amp; Learn, by Jay Nick.
+    I Love to Color, Play, &amp; Learn is as an eBook from cattocreations.com
+    Written by Jay Nick
+    Handcoding SVG since 2001
+    Author of eBook, Learn SVG Interactively, published by Catto Creations, LLC
+    http://www.jaynick.com
+    I Love to Color, Play, &amp; Learn is published by Catto Creations, LLC
+    Catto Creations mission is Family, Literacy, and Enrichment
+    Visit http://www.cattocreations.com for award winning children's eBooks
+    I Love to Color, Play, &amp; Learn and other free ePub3 eBooks at http://www.cattocreations.com/ePub3.html</desc
+  >
+  <script
+      type="application/x-javascript"
+    >var Train = new function()
+    {
+      var steps = 20;
+      var step=1;
+      var angle = -5.5;
+      var angleinc = (2.5+5.5)/steps;
+      var width = 375;
+      var widthinc = 70*2/steps;
+      var timerID=null;
+      var timerInc=300;
+      var started=false;
+      window.addEventListener("load", function(e) { init(); }, false);
+      function init()
+      {
+        var node = document.getElementById("Train");
+        node.addEventListener("click", function(e) { e.preventDefault(); toggle(); }, false);
+      }
+      function toggle()
+      {
+        if(!started) {Start(); started=true;}
+        else {Stop(); started=false;}
+      }
+      /**************************************************
+      * Start the Train 
+      **************************************************/
+      function Start()
+      {
+        try
+        {
+          if(step&gt;steps/2) angle -= angleinc*2;
+          else angle += angleinc*2;
+          var node = document.getElementById("couplingrod");
+          node.setAttribute("transform","rotate("+angle+",80,483)");
+          w = width + 25*Math.sin(-2*Math.PI*(step/steps));
+          node.setAttribute("width",w);
+          var deg = (step/steps)*-360;
+          node = document.getElementById("spoke1");
+          node.setAttribute("transform","rotate("+deg+",100,490)");
+          node = document.getElementById("spoke2");
+          node.setAttribute("transform","rotate("+deg+",270,490)");
+          node = document.getElementById("spoke3");
+          node.setAttribute("transform","rotate("+deg+",450,480)");
+          step++;
+          if(step&gt;steps) {step=1; if(timerInc&gt;100) timerInc -= 50;}
+          timerID = window.setTimeout(Start,timerInc);
+        }
+        catch(e) {}        
+      }
+      /**************************************************
+      * Stop the Train 
+      **************************************************/
+      function Stop()
+      {
+        try
+        {
+          clearTimeout(timerID); 
+          timerInc=300;
+          step=1;      
+          angle = -5.5;
+          width = 375;
+          var node = document.getElementById("couplingrod");
+          node.setAttribute("width",375);
+          node.setAttribute("transform","rotate(-5.5,80,483)");
+          node = document.getElementById("spoke1");
+          node.setAttribute("transform","rotate(0)");
+          node = document.getElementById("spoke2");
+          node.setAttribute("transform","rotate(0)");
+          node = document.getElementById("spoke3");
+          node.setAttribute("transform","rotate(0)");
+        }
+        catch(e) {}        
+      }
+    }();</script
+  >
+  <style
+      type="text/css"
+    >#Train {stroke:black;stroke-width:14px;}
+    #frame {fill:gray;stroke-width:15px;}
+    #engine {fill:lime;}
+    #stack {fill:blue;}
+    #roof {fill:red;}
+    #cab {fill:yellow;}
+    #window {fill:blue;}
+    #wheels {fill:red;}
+    .wheel1 {stroke:#333333;stroke-width:25px;}
+    .wheel2 {stroke:#333333;stroke-width:15px;}
+    #spoke1 {stroke:#333333;stroke-width:25px;stroke-dasharray:22,21.08}
+    #spoke2 {stroke:#333333;stroke-width:21px;stroke-dasharray:23,23.02}
+    #spoke3 {stroke:#333333;stroke-width:25px;stroke-dasharray:28,28.02}
+    #couplingrod {fill:#666666;stroke:none;}</style
+  >
+  <g
+      transform="translate(0) scale(1)"
+    >
+    <g
+        id="Train"
+        transform="translate(10)"
+      >
+      <rect
+          id="frame"
+          rx="30"
+          height="100"
+          width="550"
+          y="389"
+          x="0"
+      />
+      <rect
+          id="engine"
+          rx="30"
+          height="150"
+          width="350"
+          y="240"
+          x="0"
+      />
+      <rect
+          id="stack"
+          rx="20"
+          height="120"
+          width="70"
+          y="120"
+          x="50"
+      />
+      <rect
+          id="roof"
+          rx="20"
+          height="60"
+          width="270"
+          y="20"
+          x="280"
+      />
+      <rect
+          id="cab"
+          rx="30"
+          height="310"
+          width="200"
+          y="80"
+          x="350"
+      />
+      <rect
+          id="window"
+          rx="20"
+          height="100"
+          width="100"
+          y="130"
+          x="400"
+      />
+      <g
+          id="wheels"
+        >
+        <circle
+            cy="490"
+            cx="100"
+            r="60"
+            class="wheel1"
+        />
+        <circle
+            id="spoke1"
+            cy="490"
+            cx="100"
+            r="35"
+        />
+        <circle
+            cy="490"
+            cx="100"
+            r="15"
+            class="wheel2"
+        />
+        <circle
+            cy="490"
+            cx="270"
+            r="60"
+            class="wheel1"
+        />
+        <circle
+            id="spoke2"
+            cy="490"
+            cx="270"
+            r="37"
+        />
+        <circle
+            cy="490"
+            cx="270"
+            r="19"
+            class="wheel2"
+        />
+        <circle
+            cy="480"
+            cx="450"
+            r="70"
+            class="wheel1"
+        />
+        <circle
+            id="spoke3"
+            cy="480"
+            cx="450"
+            r="45"
+        />
+        <circle
+            cy="480"
+            cx="450"
+            r="25"
+            class="wheel2"
+        />
+      </g
+      >
+      <rect
+          id="couplingrod"
+          rx="5"
+          transform="rotate(-5.5,80,483)"
+          height="14"
+          width="375"
+          y="483"
+          x="80"
+      />
+    </g
+    >
+  </g
+  >
+  <metadata
+    >
+    <rdf:RDF
+      >
+      <cc:Work
+        >
+        <dc:format
+          >image/svg+xml</dc:format
+        >
+        <dc:type
+            rdf:resource="http://purl.org/dc/dcmitype/StillImage"
+        />
+        <cc:license
+            rdf:resource="http://creativecommons.org/licenses/publicdomain/"
+        />
+        <dc:publisher
+          >
+          <cc:Agent
+              rdf:about="http://openclipart.org/"
+            >
+            <dc:title
+              >Openclipart</dc:title
+            >
+          </cc:Agent
+          >
+        </dc:publisher
+        >
+        <dc:title
+          >Scripted Toy Train</dc:title
+        >
+        <dc:date
+          >2013-09-25T02:59:07</dc:date
+        >
+        <dc:description
+          >From the eBook, I Love to Color, Play, and Learn. Scripted to start/stop the wheels when clicking on the SVG image. SVG code can be inserted into an SVG image then scaled and positioned where desired.</dc:description
+        >
+        <dc:source
+          >https://openclipart.org/detail/183877/scripted-toy-train-by-jaynick-183877</dc:source
+        >
+        <dc:creator
+          >
+          <cc:Agent
+            >
+            <dc:title
+              >JayNick</dc:title
+            >
+          </cc:Agent
+          >
+        </dc:creator
+        >
+        <dc:subject
+          >
+          <rdf:Bag
+            >
+            <rdf:li
+              >door</rdf:li
+            >
+            <rdf:li
+              >handcoded</rdf:li
+            >
+            <rdf:li
+              >icon</rdf:li
+            >
+            <rdf:li
+              >javascript</rdf:li
+            >
+            <rdf:li
+              >scripted</rdf:li
+            >
+            <rdf:li
+              >shapes</rdf:li
+            >
+            <rdf:li
+              >toy</rdf:li
+            >
+            <rdf:li
+              >train</rdf:li
+            >
+            <rdf:li
+              >wheels</rdf:li
+            >
+            <rdf:li
+              >window</rdf:li
+            >
+          </rdf:Bag
+          >
+        </dc:subject
+        >
+      </cc:Work
+      >
+      <cc:License
+          rdf:about="http://creativecommons.org/licenses/publicdomain/"
+        >
+        <cc:permits
+            rdf:resource="http://creativecommons.org/ns#Reproduction"
+        />
+        <cc:permits
+            rdf:resource="http://creativecommons.org/ns#Distribution"
+        />
+        <cc:permits
+            rdf:resource="http://creativecommons.org/ns#DerivativeWorks"
+        />
+      </cc:License
+      >
+    </rdf:RDF
+    >
+  </metadata
+  >
+</svg
+>
